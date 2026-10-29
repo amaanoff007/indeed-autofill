@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Indeed Autofill Helper",
+  "version": "1.0.0",
+  "description": "Highlights matching Indeed jobs and fills Easy Apply forms from your saved answers. You review and submit.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://*.indeed.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "Indeed Autofill" },
+  "commands": {
+    "fill-form": {
+      "suggested_key": { "default": "Alt+Shift+F" },
+      "description": "Fill the current Easy Apply step"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.indeed.com/*"],
+      "js": ["profile.js", "content.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ]
+}
